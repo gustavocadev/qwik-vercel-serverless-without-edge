@@ -8,13 +8,13 @@
 pnpm qwik add express
 ```
 
-2. Create api/index.js file to the root of your project and add the following code:
+2. Create `api/index.js` file to the root of your project and add the following code:
 
 ```javascript
 export * from '../server/entry.express.js';
 ```
 
-3. Add vercel.json file to the root of your project with the following content:
+3. Add `vercel.json` file to the root of your project with the following content:
 
 ```json
 {
