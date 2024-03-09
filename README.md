@@ -1,11 +1,39 @@
 # Qwik + Vercel without the Edge
 
-## Express Server
+## Steps to deploy Qwik on Vercel without the Edge
 
-This app has a minimal [Express server](https://expressjs.com/) implementation. After running a full build, you can preview the build using the command:
+1. Add Express adapter to your Qwik app
 
+```bash
+pnpm qwik add express
 ```
-pnpm serve
+
+2. Create api/index.js file to the root of your project and add the following code:
+
+```javascript
+export * from '../server/entry.express.js';
 ```
 
-Then visit [http://localhost:8080/](http://localhost:8080/)
+3. Add vercel.json file to the root of your project with the following content:
+
+```json
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/build/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, s-maxage=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}
+```
